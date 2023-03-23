@@ -11,7 +11,7 @@ function Navbar() {
       <div className="px-2 flex justify-between items-center w-full h-full bg-white shadow-md">
 
         <div className="flex items-center ">
-          <img src={logo} alt="Logo" class=" w-40 px-1 py-1" />
+          <img src={logo} alt="Logo" className=" w-40 px-1 py-1" />
         </div>
 
         <div>

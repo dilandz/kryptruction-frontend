@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar from "./Navbar";
-
+import { PaymentsContext } from "../context/PaymentsContext";
 
 function Payment() {
+  const { formData, makePayment, handleChange, connectWallet, currentAccount } =
+    useContext(PaymentsContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // when form is submitted page won't reload
+
+    const { addressTo, amount, message } = formData; //destructure all the properties from the form data
+
+    if (!addressTo || !amount || !message) return;
+
+    makePayment();
+  };
+
   return (
     <div>
       <Navbar />
@@ -23,26 +36,48 @@ function Payment() {
           </div>
 
           <div className="border bg-white py-8 rounded-xl shadow-xl item-center text-center px-5 w-full">
-            <h1 className="font-semibold text-xl mb-3">Kryptruction Payments</h1>
+            <h1 className="font-semibold text-xl mb-3">
+              Kryptruction Payments
+            </h1>
             <div className=" flex flex-col items-center ">
               <input
                 placeholder="Address To"
-                name="addressTo"
                 type="text"
-                className="items-center text-center w-full placeholder:text-red-300 rounded-full border-b-2 bg-zinc-50 m-2 py-1 "
+                name="addressTo"
+                onChange={(e) => handleChange(e, e.target.name)}
+                className="items-center text-center w-full placeholder:text-red-300 rounded-full border-b-2 bg-zinc-50 m-2 py-1"
               />
               <input
-                placeholder="Amount (ETH)"
-                name="amount"
+                placeholder="Amount"
                 type="number"
+                step="0.001"
+                name="amount"
+                onChange={(e) => handleChange(e, e.target.name)}
+                className="items-center text-center w-full placeholder:text-red-300 rounded-full border-b-2 bg-zinc-50 m-2 py-1"
+              />
+              <input
+                placeholder="Enter Message"
+                type="text"
+                name="message"
+                onChange={(e) => handleChange(e, e.target.name)}
                 className="items-center text-center w-full placeholder:text-red-300 rounded-full border-b-2 bg-zinc-50 m-2 py-1"
               />
             </div>
-
-            <button className="mt-10 py-2 px-4 font-bold">
-              Submit Payment
-            </button>
-
+            {!currentAccount ? (
+              <button
+                onClick={connectWallet}
+                className="mb-3py-2 px-4 font-bold animate-pulse"
+              >
+                Connect Via MetaMask
+              </button>
+            ) : (
+              <button
+                className="mt-10 py-2 px-4 font-bold"
+                onClick={handleSubmit}
+              >
+                Submit Payment
+              </button>
+            )}
           </div>
         </div>
       </div>
