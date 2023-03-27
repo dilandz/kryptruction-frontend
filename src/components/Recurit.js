@@ -1,8 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect,useState } from 'react'
 import ProfileNavbar from './ProfileNavbar';
+import axios from "axios";
 
 function Recurit() {
       const [isOpenCardDetails, setIsOpenCardDetails] = useState(false);
+      const [recruitPost,setRecruitPost] = useState([]);
+
+      useEffect(() => {
+        const getRecruitPost = async () => {
+          await axios
+            .get("http://localhost:3001/jobPost/getRecruit")
+            .then((res) => {
+              setRecruitPost(res.data);
+              console.log("data getting");
+            })
+            .catch((err) => {
+              alert(err.message);
+            });
+        };
+        getRecruitPost();
+      },[]);
+      
 
       const togglePopup = () => {
         setIsOpenCardDetails(!isOpenCardDetails);
@@ -18,17 +36,18 @@ function Recurit() {
           </div>
     
           <div className="grid grid-cols-3 gap-4 px-5 py-5">
+            {recruitPost.map((data) =>(
             <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:bg-zinc-50">
               <div className="md:flex">
                 <div className="p-8">
                   <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
-                    Assinged Company
+                    {data.company_name}
                   </div>
                   <h2 className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
-                    Job name
+                    {data.job_title}
                   </h2>
                   <p className="mt-2 text-gray-500">
-                    Job description fgdfgjod gri egj ero reigj
+                    {data.job_description}
                   </p>
                   <button className="px-2 mt-2" onClick={togglePopup}>
                     View Details
@@ -36,33 +55,11 @@ function Recurit() {
                 </div>
               </div>
             </div>
-            {isOpenCardDetails && (
-              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-                <div className="bg-white rounded-md p-8 max-w-md mx-auto">
-                  <h2 className="text-2xl font-bold">title</h2>
-                  <h3 className="text-xl font-bold">Asigned Company</h3>
-                  <p className="text-gray-600">
-                    description Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit. Nullam eget tortor quam. Nulla facilisi. Vestibulum ante
-                    ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-                    Curae; Quisque nec tortor in nulla lacinia tincidunt. Fusce ac
-                    felis eget nulla viverra suscipit ut eu ex
-                  </p>
-                  <div className="flex justify-center items-center">
-                    <button className="py-2 px-4 mt-4 mx-3" onClick={togglePopup}>
-                      Close
-                    </button>
-                    <button className="py-2 px-4 mt-4 mx-3" onClick={togglePopup}>
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
+           ))}
           </div>
         </div>
       );
     
 }
 
-export default Recurit
+export default Recurit;

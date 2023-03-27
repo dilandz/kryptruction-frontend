@@ -3,8 +3,14 @@ import Navbar from "./Navbar";
 import { PaymentsContext } from "../context/PaymentsContext";
 
 function Payment() {
-  const { formData, makePayment, handleChange, connectWallet, currentAccount } =
-    useContext(PaymentsContext);
+  const {
+    formData,
+    makePayment,
+    handleChange,
+    connectWallet,
+    currentAccount,
+    isLoading,
+  } = useContext(PaymentsContext);
 
   const handleSubmit = (e) => {
     e.preventDefault(); // when form is submitted page won't reload
@@ -66,17 +72,21 @@ function Payment() {
             {!currentAccount ? (
               <button
                 onClick={connectWallet}
-                className="mb-3py-2 px-4 font-bold animate-pulse"
+                className="mb-3py-2 px-4 font-bold"
               >
-                Connect Via MetaMask
+                Connect the wallet
               </button>
-            ) : (
+            ) : !isLoading ? (
               <button
                 className="mt-10 py-2 px-4 font-bold"
                 onClick={handleSubmit}
               >
                 Submit Payment
               </button>
+            ) : (
+              <div className="flex justify-center items-center py-3">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-800" />
+              </div>
             )}
           </div>
         </div>

@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import logo from "../img/logo.png";
 import { Link } from "react-router-dom";
+import { PaymentsContext } from "../context/PaymentsContext";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [nav, setNav] = useState(false);
   const openMenu = () => setNav(!nav);
+  const { disconnectWallet } = useContext(PaymentsContext);
+  const navigate = useNavigate();
+
+  const handleDisconnect = async () => {
+     await disconnectWallet();
+     navigate("/");
+  }
 
   return (
     <div>
@@ -29,7 +38,7 @@ function Navbar() {
         </div>
 
         <div className="hidden md:flex pr-4">
-          <button className="px-4 py-1 mb-3 mt-3 font-medium">Sign Out</button>
+          <button onClick={handleDisconnect} className="px-4 py-1 mb-3 mt-3 font-medium">Sign Out</button>
         </div>
         <div className="md:hidden" onClick={openMenu}>
           {!nav ? <h3>Menu</h3> : <h3>Close</h3>}
@@ -47,7 +56,7 @@ function Navbar() {
           <Link to="/profile">Profile </Link>
         </li>
         <div className="flex flex-col my-4">
-          <button className="px-4 py-1 font-medium">Sign Out</button>
+          <button onClick={handleDisconnect} className="px-4 py-1 font-medium">Sign Out</button>
         </div>
       </ul>
 

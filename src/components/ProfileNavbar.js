@@ -31,6 +31,9 @@ function ProfileNavbar() {
             <li className="hover:shadow-lg rounded-full px-5 py-1">
               <Link to="/profile/recurit">Recurits </Link>
             </li>
+            <li className="hover:shadow-lg rounded-full px-5 py-1">
+              <Link to="/profile/request">Request </Link>
+            </li>
           </ul>
         </div>
 

@@ -8,12 +8,11 @@ function Login() {
   const navigate = useNavigate();
   const { connectWallet, currentAccount } = useContext(PaymentsContext);
 
- 
   const handleLoginClick = async () => {
     await connectWallet();
     navigate("/home");
   };
-
+  
   return (
     <div className="w-full h-screen flex flex-col justify-between px-10 bg-zinc-50">
       <div className="grid md:grid-cols-2 max-w-{1240px} m-auto">
@@ -27,14 +26,14 @@ function Login() {
         <div className="border bg-white py-8 rounded-xl shadow-xl item-center text-center">
           <h3 className="font-semibold mb-3">Login To Kryptruction</h3>
 
-          {!currentAccount ? (
+          {/* {!currentAccount ? ( */}
             <button
               onClick={handleLoginClick}
               className="mb-3py-2 px-4 font-bold animate-pulse"
             >
               Connect Via MetaMask
             </button>
-          ):(navigate("/home"))}
+          {/* ):(navigate("/home"))} */}
 
          
           <h3 className="text-left ml-6  mt-4 font-bold text-sm">Note:</h3>
