@@ -5,11 +5,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 function Home() {
-
-
   const [isOpenNewPost, setIsOpenNewPost] = useState(false);
   const [postInfo, setPostInfo] = useState([]);
- 
 
   useEffect(() => {
     const getPost = async () => {
@@ -17,7 +14,6 @@ function Home() {
         .get("http://localhost:3001/jobPost/getJobPosts")
         .then((res) => {
           setPostInfo(res.data);
-          
         })
         .catch((err) => {
           console.log(err.message);
@@ -26,7 +22,6 @@ function Home() {
     getPost();
   }, []);
 
- 
   return (
     <div className=" bg-zinc-50 h-full w-full">
       <Navbar />
@@ -53,17 +48,19 @@ function Home() {
             <div className="md:flex">
               <div className="p-8">
                 <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
-                  {post.contact_name}
+                  {post.contactName}
                 </div>
                 <h2 className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
-                  {post.job_title}
+                  {post.jobTitle}
                 </h2>
-                <p className="mt-2 text-gray-500">{post.job_description}</p>
+                <p className="mt-2 text-gray-500">{post.jobDescription}</p>
                 <h3>${post.price}</h3>
-                <Link className="px-2 items-center bg-red-800 hover:bg-transparent hover:text-red-800 text-white rounded-full" to={`/viewdetails/${post._id}`}>
+                <Link
+                  className="px-2 items-center bg-red-800 hover:bg-transparent hover:text-red-800 text-white rounded-full"
+                  to={`/viewdetails/${post._id}`}
+                >
                   View Details
                 </Link>
-                
               </div>
             </div>
           </div>

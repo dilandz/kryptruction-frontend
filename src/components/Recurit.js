@@ -41,13 +41,13 @@ function Recurit() {
               <div className="md:flex">
                 <div className="p-8">
                   <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
-                    {data.company_name}
+                    {data.companyName}
                   </div>
                   <h2 className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
-                    {data.job_title}
+                    {data.jobTitle}
                   </h2>
                   <p className="mt-2 text-gray-500">
-                    {data.job_description}
+                    {data.jobDescription}
                   </p>
                   <button className="px-2 mt-2" onClick={togglePopup}>
                     View Details

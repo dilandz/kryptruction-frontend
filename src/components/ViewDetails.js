@@ -48,15 +48,15 @@ function ViewDetails() {
 
           <div className="border-t border-gray-300 px-4 py-5 sm:px-6">
             <h3 className="text-sm text-gray-500">Job Title</h3>
-            <h3 className="mt-1 text-mb font-semibold mb-2"> {postInfo.job_title}</h3>
+            <h3 className="mt-1 text-mb font-semibold mb-2"> {postInfo.jobTitle}</h3>
             <h3 className="text-sm text-gray-500">
               Job Description
             </h3>
-            <p className="mt-1  text-mb font-semibold mb-4"> {postInfo.job_description}</p>
+            <p className="mt-1  text-mb font-semibold mb-4"> {postInfo.jobDescription}</p>
             <dl className="grid grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-2">
               <div className="sm:col-span-1">
                 <dt className="text-sm text-gray-500">Posted By</dt>
-                <dd className="mt-1  text-mb font-semibold">{postInfo.contact_name}</dd>
+                <dd className="mt-1  text-mb font-semibold">{postInfo.contactName}</dd>
               </div>
               <div className="sm:col-span-1">
                 <dt className="text-sm text-gray-500">Rate</dt>

@@ -3,9 +3,9 @@ import React, { useState } from "react";
 
 
 function NewPost({ open, onClose }) {
-  const [job_title, setTitle] = useState("");
-  const [job_description, setDescription] = useState("");
-  const [contact_name, setName] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [jobDescription, setJobDescription] = useState("");
+  const [contactName, setContactName] = useState("");
   const [location, setLocation] = useState("");
   const [price, setPrice] = useState("");
 
@@ -13,9 +13,9 @@ function NewPost({ open, onClose }) {
     e.preventDefault();
 
     const newPost = {
-      job_title,
-      job_description,
-      contact_name,
+      jobTitle,
+      jobDescription,
+      contactName,
       location,
       price,
     };
@@ -44,10 +44,10 @@ function NewPost({ open, onClose }) {
           </label>
           <input
             type="text"
-            id="job_title"
-            name="job_title"
+            id="jobTitle"
+            name="jobTitle"
             onChange={(e) => {
-              setTitle(e.target.value);
+              setJobTitle(e.target.value);
             }}
             className="w-full border-gray-300 rounded-md mb-4 border-2"
           />
@@ -56,10 +56,10 @@ function NewPost({ open, onClose }) {
             Job Description
           </label>
           <textarea
-            id="job_description"
-            name="job_description"
+            id="jobDescription"
+            name="jobDescription"
             onChange={(e) => {
-              setDescription(e.target.value);
+              setJobDescription(e.target.value);
             }}
             className="w-full border-gray-300 rounded-md mb-4 border-2"
           ></textarea>
@@ -69,10 +69,10 @@ function NewPost({ open, onClose }) {
           </label>
           <input
             type="text"
-            id="contact_name"
-            name="contact_name"
+            id="contactName"
+            name="contactName"
             onChange={(e) => {
-              setName(e.target.value);
+              setContactName(e.target.value);
             }}
             className="w-full border-gray-300 rounded-md mb-4 border-2"
           />
