@@ -34,7 +34,29 @@ function Request() {
       });
   };
 
-  
+  //TODO: update does not work
+  const handleAccept = async (data)=> {
+    
+
+    const newRecruitInfo ={
+      jobTitle: data.jobTitle,
+      jobDescription: data.jobDescription,
+      contactName: data.contactName,
+      location: data.location,
+      price: data.price,
+      companyName: "agree to",
+      companyAcc:"allowded",
+      userID: "thnjkv",
+      
+    }
+    await axios.post("http://localhost:3001/jobPost/postRecruit",newRecruitInfo).then(() => {
+      console.log("Save to recruit table");
+      alert("Job Agreement is accepted");
+      
+    }).catch((err) =>{
+      console.log(err.message);
+    })
+  }
 
   return (
     <div className=" bg-zinc-50 h-screen w-full">
@@ -65,7 +87,7 @@ function Request() {
                   >
                     Reject
                   </button>
-                  <button className="py-1 px-4 mt-3 mx-3 mb-2">Accept</button>
+                  <button className="py-1 px-4 mt-3 mx-3 mb-2" onClick={() => handleAccept(data)}>Accept</button>
                 </div>
               </div>
             </div>
