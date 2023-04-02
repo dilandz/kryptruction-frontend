@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 
-import { contractABI, contractAddress } from "../abi_contract/constants";
+import { contractTransactionABI, contractTransactionAddress } from "../abi_contract/constants";
 
 export const PaymentsContext = React.createContext();
 
@@ -11,8 +11,8 @@ const getContract = () => {
   const provider = new ethers.providers.Web3Provider(ethereum);
   const signer = provider.getSigner();
   const paymentContract = new ethers.Contract(
-    contractAddress,
-    contractABI,
+    contractTransactionAddress,
+    contractTransactionABI,
     signer
   );
 

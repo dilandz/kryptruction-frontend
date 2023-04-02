@@ -22,11 +22,13 @@ function Recurit() {
 
   const agreementAccept = async (data) => {
     console.log(data._id);
+    const id = data._id;
 
    
     await axios
-      .patch(`http://localhost:3001/jobPost/updateRecruit/${data._id}`)
-      .then(() => {
+      .put(`http://localhost:3001/jobPost/updateRecruit/${id}`)
+      .then((res) => {
+        console.log(res.data);
         console.log("Agreement Accepted");
       })
       .catch((err) => {

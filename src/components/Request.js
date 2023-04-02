@@ -47,6 +47,7 @@ function Request() {
       companyName: "agree to",
       companyAcc:"allowded",
       userID: "thnjkv",
+      approval:"true",
       
     }
     await axios.post("http://localhost:3001/jobPost/postRecruit",newRecruitInfo).then(() => {
