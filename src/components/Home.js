@@ -8,6 +8,7 @@ function Home() {
   const [isOpenNewPost, setIsOpenNewPost] = useState(false);
   const [postInfo, setPostInfo] = useState([]);
 
+  //Getting all the post from the marketplace table
   useEffect(() => {
     const getPost = async () => {
       await axios

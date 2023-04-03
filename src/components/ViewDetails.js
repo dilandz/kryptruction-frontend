@@ -7,9 +7,6 @@ function ViewDetails() {
   const navigate = useNavigate();
 
   const { id } = useParams();
-  
-  
-
 
   //Get job post details based on selected id to the edit
   useEffect(() => {
@@ -27,21 +24,21 @@ function ViewDetails() {
     getPostByID();
   }, [id]);
 
-  
   const toggleClose = () => {
     navigate(-1);
   };
 
   const handleRequest = async (date) => {
-
-    await axios.post("http://localhost:3001/jobPost/postRequest",postInfo).then(() => {
-      console.log("Save to request table");
-      alert("Request Created");
-      
-    }).catch((err) =>{
-      console.log(err.message);
-    })
-  }
+    await axios
+      .post("http://localhost:3001/jobPost/postRequest", postInfo)
+      .then(() => {
+        console.log("Save to request table");
+        alert("Request Created");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
 
   return (
     <div className=" bg-zinc-50 h-full w-full">
@@ -51,15 +48,21 @@ function ViewDetails() {
 
           <div className="border-t border-gray-300 px-4 py-5 sm:px-6">
             <h3 className="text-sm text-gray-500">Job Title</h3>
-            <h3 className="mt-1 text-mb font-semibold mb-2"> {postInfo.jobTitle}</h3>
-            <h3 className="text-sm text-gray-500">
-              Job Description
+            <h3 className="mt-1 text-mb font-semibold mb-2">
+              {" "}
+              {postInfo.jobTitle}
             </h3>
-            <p className="mt-1  text-mb font-semibold mb-4"> {postInfo.jobDescription}</p>
+            <h3 className="text-sm text-gray-500">Job Description</h3>
+            <p className="mt-1  text-mb font-semibold mb-4">
+              {" "}
+              {postInfo.jobDescription}
+            </p>
             <dl className="grid grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-2">
               <div className="sm:col-span-1">
                 <dt className="text-sm text-gray-500">Posted By</dt>
-                <dd className="mt-1  text-mb font-semibold">{postInfo.contactName}</dd>
+                <dd className="mt-1  text-mb font-semibold">
+                  {postInfo.contactName}
+                </dd>
               </div>
               <div className="sm:col-span-1">
                 <dt className="text-sm text-gray-500">Rate</dt>
@@ -67,12 +70,12 @@ function ViewDetails() {
               </div>
               <div className="sm:col-span-1">
                 <dt className="text-sm text-gray-500">Location</dt>
-                <dd className="mt-1 text-mb font-semibold">{postInfo.location}</dd>
+                <dd className="mt-1 text-mb font-semibold">
+                  {postInfo.location}
+                </dd>
               </div>
               <div className="sm:col-span-1">
-                <dt className="text-sm text-gray-500">
-                  Was Created on
-                </dt>
+                <dt className="text-sm text-gray-500">Was Created on</dt>
                 <dd className="mt-1 text-mb font-semibold">{postInfo.date}</dd>
               </div>
             </dl>
@@ -83,10 +86,10 @@ function ViewDetails() {
           <button className="py-1 px-4 mt-4 mx-3 mb-3" onClick={toggleClose}>
             Close
           </button>
-          
-           <button className="py-1 px-4 mt-4 mx-3 mb-3" onClick={handleRequest}>Request</button>
-         
-         
+
+          <button className="py-1 px-4 mt-4 mx-3 mb-3" onClick={handleRequest}>
+            Request
+          </button>
         </div>
       </div>
     </div>

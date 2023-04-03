@@ -9,7 +9,7 @@
       
 
       button{
-            @apply  bg-red-800 hover:bg-transparent hover:text-red-800 text-white rounded-full
+            @apply  bg-red-800 hover:bg-transparent hover:text-red-800 text-white rounded-full py-2
       }
 
      

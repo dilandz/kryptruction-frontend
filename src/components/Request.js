@@ -11,6 +11,7 @@ function Request() {
   const { ethereum } = window;
   const [requestInfo, setRequestInfo] = useState([]);
 
+  //When accepting the request from poster side agreement is created 
   const createAgreement = async () => {
     const provider = new ethers.providers.Web3Provider(ethereum);
     const signer = provider.getSigner();
@@ -62,7 +63,7 @@ function Request() {
       });
   };
 
-  //TODO: update does not work
+  // Post the job post data to new table and delete from requested list and table
   const handleAccept = async (data) => {
     console.log(data);
     await axios
@@ -70,7 +71,6 @@ function Request() {
       .then(() => {
         createAgreement();
         deleteRequest(data._id);
-        console.log("Save to recruit table");
         alert("Job Agreement is accepted");
       })
       .catch((err) => {

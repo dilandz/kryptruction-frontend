@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 function Post() {
   const [postInfo, setPostInfo] = useState([]);
 
+  //Getting submitted post 
   useEffect(() => {
     const getPost = async () => {
       await axios
@@ -20,6 +21,7 @@ function Post() {
     getPost();
   }, []);
 
+  //deleting the submitted post
   const deletePost = async (id) => {
     await axios
       .delete(`http://localhost:3001/jobPost/deletePost/${id}`)
@@ -55,7 +57,7 @@ function Post() {
                 </h2>
                 <p className="mt-2 text-gray-500">{data.jobDescription}</p>
                 <Link
-                  className="px-2 items-center bg-red-800 hover:bg-transparent hover:text-red-800 text-white rounded-full"
+                  className="px-2 items-center py-2 bg-red-800 hover:bg-transparent hover:text-red-800 text-white rounded-full"
                   to={`/details/${data._id}`}
                 >
                   View Details

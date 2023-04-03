@@ -27,8 +27,7 @@ function Recurit() {
     getRecruitPost();
   }, []);
 
-
-
+  // Accepting the agreement from company side
   const acceptAgreement = async () => {
     const provider = new ethers.providers.Web3Provider(ethereum);
     const signer = provider.getSigner();
@@ -41,16 +40,14 @@ function Recurit() {
     const accounts = await window.ethereum.request({ method: "eth_accounts" });
 
     const agreementHash = await agreementContract.approveAgreement();
-   
 
     console.log(`Loading - ${agreementHash.hash}`);
     await agreementHash.wait();
     console.log(`Success - ${agreementHash.hash}`);
   };
 
-
+  //When accpeted posting it's data to the recruit table
   const agreementAccept = async (data) => {
-   
     const id = data._id;
     await axios
       .put(`http://localhost:3001/jobPost/updateRecruit/${id}`)

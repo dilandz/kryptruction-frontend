@@ -1,12 +1,12 @@
 import "./App.css";
 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Payment from "./components/Payment";
 import Profile from "./components/Profile";
 import Home from "./components/Home";
 import Post from "./components/Post";
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SignUP from "./components/SignUp";
 import Progress from "./components/Progress";
 import Recurit from "./components/Recurit";
 import ViewDetails from "./components/ViewDetails";
@@ -20,6 +20,7 @@ function App() {
       <div>
         <Routes>
           <Route exact path="/" element={<Login />}></Route>
+          <Route exact path="/signup" element={<SignUP />}></Route>
           <Route exact path="/home" element={<Home />}></Route>
           <Route exact path="/viewdetails/:id" element={<ViewDetails />}></Route>
           <Route exact path="/details/:id" element={<ViewPostInfo />}></Route>

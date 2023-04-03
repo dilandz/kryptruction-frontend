@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-
 function NewPost({ open, onClose }) {
   const [jobTitle, setJobTitle] = useState("");
   const [jobDescription, setJobDescription] = useState("");
@@ -20,17 +19,16 @@ function NewPost({ open, onClose }) {
       price,
     };
 
-    console.log(newPost);
+    //Posting into the job post table new posts
     axios
       .post("http://localhost:3001/jobPost/postJobPost", newPost)
       .then(() => {
         alert("New job post is added");
-         
       })
       .catch((err) => {
         console.log(err.message);
       });
-      window.location.reload();
+    window.location.reload();
   };
 
   if (!open) return null;
