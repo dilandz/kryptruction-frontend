@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import logo from "../img/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function ProfileNavbar() {
   const [nav, setNav] = useState(false);
   const openMenu = () => setNav(!nav);
+  const navigate = useNavigate();
+
+  const signOut = () =>{
+    navigate("/");
+  }
 
   return (
     <div>
@@ -38,7 +43,7 @@ function ProfileNavbar() {
         </div>
 
         <div className="hidden md:flex pr-4">
-          <button className="px-4 py-1 mb-3 mt-3 font-medium">Sign Out</button>
+          <button className="px-4 py-1 mb-3 mt-3 font-medium" onClick={signOut}>Sign Out</button>
         </div>
         <div className="md:hidden" onClick={openMenu}>
           {!nav ? <h3>Menu</h3> : <h3>Close</h3>}
@@ -62,7 +67,7 @@ function ProfileNavbar() {
           <Link to="/profile/recurit">Recurits </Link>
         </li>
         <div className="flex flex-col my-4">
-          <button className="px-4 py-1 font-medium">Sign Out</button>
+          <button className="px-4 py-1 font-medium" onClick={signOut}>Sign Out</button>
         </div>
       </ul>
 

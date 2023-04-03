@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ProfileNavbar from "./ProfileNavbar";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Progress() {
   const [progressPost, setProgressPost] = useState([]);
@@ -41,8 +42,13 @@ function Progress() {
                   <h2 className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
                     {data.jobTitle}
                   </h2>
-                  <p className="mt-2 text-gray-500">{data.jobDescription}</p>
-                  <button className="px-2 mt-2">View Details</button>
+                  <p className="mt-2 text-gray-500 mb-4">{data.jobDescription}</p>
+                  <Link
+                  className="px-2 p-1 items-center bg-red-800 hover:bg-transparent hover:text-red-800 text-white rounded-full"
+                  to={`/accepteddetails/${data._id}`}
+                >
+                  View Details
+                </Link>
                 </div>
               </div>
             </div>

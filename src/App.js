@@ -11,7 +11,8 @@ import Progress from "./components/Progress";
 import Recurit from "./components/Recurit";
 import ViewDetails from "./components/ViewDetails";
 import Request from "./components/Request";
-
+import ViewPostInfo from "./components/ViewPostInfo";
+import ApprovedPostInfo from "./components/ApprovedPostInfo";
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
           <Route exact path="/" element={<Login />}></Route>
           <Route exact path="/home" element={<Home />}></Route>
           <Route exact path="/viewdetails/:id" element={<ViewDetails />}></Route>
+          <Route exact path="/details/:id" element={<ViewPostInfo />}></Route>
+          <Route exact path="/accepteddetails/:id" element={<ApprovedPostInfo />}></Route>
           <Route exact path="/payment" element={<Payment />}></Route>
           <Route exact path="/profile" element={<Profile />}></Route>
           <Route exact path="/profile/post" element={<Post />}></Route>

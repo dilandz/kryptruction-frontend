@@ -5,11 +5,8 @@ import axios from "axios";
 function ViewDetails() {
   const [postInfo, setPostInfo] = useState({});
   const navigate = useNavigate();
-
   const { id } = useParams();
   
-  
-
 
   //Get job post details based on selected id to the edit
   useEffect(() => {
@@ -32,16 +29,7 @@ function ViewDetails() {
     navigate(-1);
   };
 
-  const handleRequest = async (date) => {
-
-    await axios.post("http://localhost:3001/jobPost/postRequest",postInfo).then(() => {
-      console.log("Save to request table");
-      alert("Request Created");
-      
-    }).catch((err) =>{
-      console.log(err.message);
-    })
-  }
+  
 
   return (
     <div className=" bg-zinc-50 h-full w-full">
@@ -83,9 +71,6 @@ function ViewDetails() {
           <button className="py-1 px-4 mt-4 mx-3 mb-3" onClick={toggleClose}>
             Close
           </button>
-          
-           <button className="py-1 px-4 mt-4 mx-3 mb-3" onClick={handleRequest}>Request</button>
-         
          
         </div>
       </div>

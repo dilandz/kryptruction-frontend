@@ -54,7 +54,7 @@ function Request() {
       .delete(`http://localhost:3001/jobPost/deleteRequest/${id}`)
       .then(() => {
         console.log("Request Deleted");
-        alert("Requested Job Rejected");
+      
         window.location.reload();
       })
       .catch((err) => {
@@ -69,6 +69,7 @@ function Request() {
       .post("http://localhost:3001/jobPost/postRecruit", data)
       .then(() => {
         createAgreement();
+        deleteRequest(data._id);
         console.log("Save to recruit table");
         alert("Job Agreement is accepted");
       })
@@ -94,12 +95,11 @@ function Request() {
                 <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
                   {data.companyName}
                 </div>
-                <h2 className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
+                <h2 className=" mt-1 text-lg  font-medium text-black ">
                   {data.jobTitle}
                 </h2>
                 <p className="mt-2 text-gray-500">{data.jobDescription}</p>
-                <div className="flex justify-center items-center">
-                  {/* <button className="py-1 px-4 mt-3 mx-3 mb-2">Close</button> */}
+                
                   <button
                     className="py-1 px-4 mt-3 mx-3 mb-2"
                     onClick={() => deleteRequest(data._id)}
@@ -112,7 +112,7 @@ function Request() {
                   >
                     Accept
                   </button>
-                </div>
+               
               </div>
             </div>
           </div>

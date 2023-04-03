@@ -6,6 +6,7 @@ import {
   contractAgreementABI,
   contractAgreementAddress,
 } from "../abi_contract/constants";
+import { Link } from "react-router-dom";
 
 function Recurit() {
   const [recruitPost, setRecruitPost] = useState([]);
@@ -25,6 +26,8 @@ function Recurit() {
     };
     getRecruitPost();
   }, []);
+
+
 
   const acceptAgreement = async () => {
     const provider = new ethers.providers.Web3Provider(ethereum);
@@ -82,11 +85,16 @@ function Recurit() {
                 <h2 className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
                   {data.jobTitle}
                 </h2>
-                <p className="mt-2 text-gray-500">{data.jobDescription}</p>
-                <button className="px-2 mt-2">View Details</button>
+                <p className="mt-2 text-gray-500 mb-4">{data.jobDescription}</p>
+                <Link
+                  className="px-2 p-1 m-3 items-center bg-red-800 hover:bg-transparent hover:text-red-800 text-white rounded-full"
+                  to={`/accepteddetails/${data._id}`}
+                >
+                  View Details
+                </Link>
                 {!data.approval ? (
                   <button
-                    className="px-2 mt-2"
+                    className="px-2 mt-2 m-3 p-1"
                     onClick={() => agreementAccept(data)}
                   >
                     Accept Agreement
