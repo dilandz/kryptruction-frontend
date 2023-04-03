@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import ProfileNavbar from "./ProfileNavbar";
 import axios from "axios";
+import { ethers } from "ethers";
+import {
+  contractAgreementABI,
+  contractAgreementAddress,
+} from "../abi_contract/constants";
 
 function Recurit() {
   const [recruitPost, setRecruitPost] = useState([]);
+  const { ethereum } = window;
 
   useEffect(() => {
     const getRecruitPost = async () => {
@@ -20,11 +26,29 @@ function Recurit() {
     getRecruitPost();
   }, []);
 
-  const agreementAccept = async (data) => {
-    console.log(data._id);
-    const id = data._id;
+  const acceptAgreement = async () => {
+    const provider = new ethers.providers.Web3Provider(ethereum);
+    const signer = provider.getSigner();
+    const agreementContract = new ethers.Contract(
+      contractAgreementAddress,
+      contractAgreementABI,
+      signer
+    );
 
+    const accounts = await window.ethereum.request({ method: "eth_accounts" });
+
+    const agreementHash = await agreementContract.approveAgreement();
    
+
+    console.log(`Loading - ${agreementHash.hash}`);
+    await agreementHash.wait();
+    console.log(`Success - ${agreementHash.hash}`);
+  };
+
+
+  const agreementAccept = async (data) => {
+   
+    const id = data._id;
     await axios
       .put(`http://localhost:3001/jobPost/updateRecruit/${id}`)
       .then((res) => {
@@ -34,6 +58,8 @@ function Recurit() {
       .catch((err) => {
         alert(err.message);
       });
+
+    acceptAgreement();
   };
 
   return (
@@ -58,7 +84,7 @@ function Recurit() {
                 </h2>
                 <p className="mt-2 text-gray-500">{data.jobDescription}</p>
                 <button className="px-2 mt-2">View Details</button>
-                {!data.acceptedAgreement ? (
+                {!data.approval ? (
                   <button
                     className="px-2 mt-2"
                     onClick={() => agreementAccept(data)}

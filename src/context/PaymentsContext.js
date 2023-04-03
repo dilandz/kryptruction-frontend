@@ -7,6 +7,7 @@ export const PaymentsContext = React.createContext();
 
 const { ethereum } = window;
 
+
 const getContract = () => {
   const provider = new ethers.providers.Web3Provider(ethereum);
   const signer = provider.getSigner();
@@ -123,6 +124,7 @@ export const PaymentProvider = ({ children }) => {
         parsedAmount,
         message
       );
+      
 
       setIsLoading(true);
       console.log(`Loading - ${paymentHash.hash}`);

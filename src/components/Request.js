@@ -1,9 +1,38 @@
 import React, { useEffect, useState } from "react";
 import ProfileNavbar from "./ProfileNavbar";
 import axios from "axios";
+import { ethers } from "ethers";
+import {
+  contractAgreementABI,
+  contractAgreementAddress,
+} from "../abi_contract/constants";
 
 function Request() {
+  const { ethereum } = window;
   const [requestInfo, setRequestInfo] = useState([]);
+
+  const createAgreement = async () => {
+    const provider = new ethers.providers.Web3Provider(ethereum);
+    const signer = provider.getSigner();
+    const agreementContract = new ethers.Contract(
+      contractAgreementAddress,
+      contractAgreementABI,
+      signer
+    );
+
+    const accounts = await window.ethereum.request({ method: "eth_accounts" });
+    const agreementText =
+      "Creating this agreement makes you agree to work together with other party and provide all the necessary serivces.";
+
+    const agreementHash = await agreementContract.createAgreement(
+      agreementText,
+      accounts[0]
+    );
+
+    console.log(`Loading - ${agreementHash.hash}`);
+    await agreementHash.wait();
+    console.log(`Success - ${agreementHash.hash}`);
+  };
 
   const getRequest = async () => {
     await axios
@@ -19,9 +48,8 @@ function Request() {
   useEffect(() => {
     getRequest();
   }, []);
-
-  const deleteRequest = async (id) => {  
-   
+ 
+  const deleteRequest = async (id) => {
     await axios
       .delete(`http://localhost:3001/jobPost/deleteRequest/${id}`)
       .then(() => {
@@ -35,29 +63,19 @@ function Request() {
   };
 
   //TODO: update does not work
-  const handleAccept = async (data)=> {
-    
-
-    const newRecruitInfo ={
-      jobTitle: data.jobTitle,
-      jobDescription: data.jobDescription,
-      contactName: data.contactName,
-      location: data.location,
-      price: data.price,
-      companyName: "agree to",
-      companyAcc:"allowded",
-      userID: "thnjkv",
-      approval:"true",
-      
-    }
-    await axios.post("http://localhost:3001/jobPost/postRecruit",newRecruitInfo).then(() => {
-      console.log("Save to recruit table");
-      alert("Job Agreement is accepted");
-      
-    }).catch((err) =>{
-      console.log(err.message);
-    })
-  }
+  const handleAccept = async (data) => {
+    console.log(data);
+    await axios
+      .post("http://localhost:3001/jobPost/postRecruit", data)
+      .then(() => {
+        createAgreement();
+        console.log("Save to recruit table");
+        alert("Job Agreement is accepted");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
 
   return (
     <div className=" bg-zinc-50 h-screen w-full">
@@ -88,7 +106,12 @@ function Request() {
                   >
                     Reject
                   </button>
-                  <button className="py-1 px-4 mt-3 mx-3 mb-2" onClick={() => handleAccept(data)}>Accept</button>
+                  <button
+                    className="py-1 px-4 mt-3 mx-3 mb-2"
+                    onClick={() => handleAccept(data)}
+                  >
+                    Accept
+                  </button>
                 </div>
               </div>
             </div>
