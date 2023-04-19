@@ -8,7 +8,7 @@ import {
 } from "../abi_contract/constants";
 import { Link } from "react-router-dom";
 
-function Recurit() {
+function Recruit() {
   const [recruitPost, setRecruitPost] = useState([]);
   const { ethereum } = window;
 
@@ -67,7 +67,7 @@ function Recurit() {
       <ProfileNavbar />
       <div className="flex justify-between items-start py-4 px-8 ">
         <h1 className="text-2xl font-bold text-red-800 uppercase items-start">
-          Current Recurits
+          Current Recruits
         </h1>
       </div>
 
@@ -106,4 +106,4 @@ function Recurit() {
   );
 }
 
-export default Recurit;
+export default Recruit;

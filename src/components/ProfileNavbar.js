@@ -34,7 +34,7 @@ function ProfileNavbar() {
               <Link to="/profile/progress">Work In Progress </Link>
             </li>
             <li className="hover:shadow-lg rounded-full px-5 py-1">
-              <Link to="/profile/recurit">Recurits </Link>
+              <Link to="/profile/recruit">Recruits </Link>
             </li>
             <li className="hover:shadow-lg rounded-full px-5 py-1">
               <Link to="/profile/request">Request </Link>
@@ -64,7 +64,7 @@ function ProfileNavbar() {
           <Link to="/profile/progress">Work In Progress </Link>
         </li>
         <li className="border-b-2 border-zinc-300 w-full">
-          <Link to="/profile/recurit">Recurits </Link>
+          <Link to="/profile/recruit">Recruits </Link>
         </li>
         <div className="flex flex-col my-4">
           <button className="px-4 py-1 font-medium" onClick={signOut}>Sign Out</button>

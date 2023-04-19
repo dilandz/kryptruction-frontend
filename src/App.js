@@ -8,7 +8,7 @@ import Home from "./components/Home";
 import Post from "./components/Post";
 import SignUP from "./components/SignUp";
 import Progress from "./components/Progress";
-import Recurit from "./components/Recurit";
+import Recruit from "./components/Recruit";
 import ViewDetails from "./components/ViewDetails";
 import Request from "./components/Request";
 import ViewPostInfo from "./components/ViewPostInfo";
@@ -29,7 +29,7 @@ function App() {
           <Route exact path="/profile" element={<Profile />}></Route>
           <Route exact path="/profile/post" element={<Post />}></Route>
           <Route exact path="/profile/progress" element={<Progress />}></Route>
-          <Route exact path="/profile/recurit" element={<Recurit />}></Route>
+          <Route exact path="/profile/recruit" element={<Recruit />}></Route>
           <Route exact path="/profile/request" element={<Request />}></Route>
         </Routes>
       </div>
