@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import logo from "../img/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function ProfileNavbar() {
   const [nav, setNav] = useState(false);
   const openMenu = () => setNav(!nav);
+  const navigate = useNavigate();
+
+  const signOut = () =>{
+    navigate("/");
+  }
 
   return (
     <div>
       <div className="px-2 flex justify-between items-center w-full h-full bg-white shadow-md">
 
         <div className="flex items-center ">
-          <img src={logo} alt="Logo" class=" w-40 px-1 py-1" />
+          <img src={logo} alt="Logo" className=" w-40 px-1 py-1" />
         </div>
 
         <div>
@@ -29,13 +34,16 @@ function ProfileNavbar() {
               <Link to="/profile/progress">Work In Progress </Link>
             </li>
             <li className="hover:shadow-lg rounded-full px-5 py-1">
-              <Link to="/profile/recurit">Recurits </Link>
+              <Link to="/profile/recruit">Recruits </Link>
+            </li>
+            <li className="hover:shadow-lg rounded-full px-5 py-1">
+              <Link to="/profile/request">Request </Link>
             </li>
           </ul>
         </div>
 
         <div className="hidden md:flex pr-4">
-          <button className="px-4 py-1 mb-3 mt-3 font-medium">Sign Out</button>
+          <button className="px-4 py-1 mb-3 mt-3 font-medium" onClick={signOut}>Sign Out</button>
         </div>
         <div className="md:hidden" onClick={openMenu}>
           {!nav ? <h3>Menu</h3> : <h3>Close</h3>}
@@ -56,10 +64,10 @@ function ProfileNavbar() {
           <Link to="/profile/progress">Work In Progress </Link>
         </li>
         <li className="border-b-2 border-zinc-300 w-full">
-          <Link to="/profile/recurit">Recurits </Link>
+          <Link to="/profile/recruit">Recruits </Link>
         </li>
         <div className="flex flex-col my-4">
-          <button className="px-4 py-1 font-medium">Sign Out</button>
+          <button className="px-4 py-1 font-medium" onClick={signOut}>Sign Out</button>
         </div>
       </ul>
 

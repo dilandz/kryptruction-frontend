@@ -1,75 +1,71 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import NewPost from "./NewPost";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Home() {
-  const [isOpenCardDetails, setIsOpenCardDetails] = useState(false);
   const [isOpenNewPost, setIsOpenNewPost] = useState(false);
-  
+  const [postInfo, setPostInfo] = useState([]);
 
-  const togglePopup = () => {
-    setIsOpenCardDetails(!isOpenCardDetails);
-  };
-
+  //Getting all the post from the marketplace table
+  useEffect(() => {
+    const getPost = async () => {
+      await axios
+        .get("http://localhost:3001/jobPost/getJobPosts")
+        .then((res) => {
+          setPostInfo(res.data);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    };
+    getPost();
+  }, []);
 
   return (
-    <div className=" bg-zinc-50 h-screen w-full">
+    <div className=" bg-zinc-50 h-full w-full">
       <Navbar />
       <div className="flex justify-between items-start py-4 px-8 ">
         <h1 className="text-2xl font-bold text-red-800 uppercase items-start">
           Marketplace
         </h1>
-        <button className="px-4 py-2 items-end" onClick={() => setIsOpenNewPost(true)}>
-              New
-            </button>
-          </div>
-         
-          <NewPost open={isOpenNewPost} onClose={() => setIsOpenNewPost(false)}/>
+        <button
+          className="px-4 py-2 items-end"
+          onClick={() => setIsOpenNewPost(true)}
+        >
+          New
+        </button>
+      </div>
 
-      <div className="grid grid-cols-4 gap-4 px-5 py-5">
-        <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:bg-zinc-50">
-          <div className="md:flex">
-            <div className="p-8">
-              <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
-                Job title
-              </div>
-              <h2 className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
-                Job name
-              </h2>
-              <p className="mt-2 text-gray-500">
-                Job description fgdfgjod gri egj ero reigj
-              </p>
-              <button className="px-2 mt-2" onClick={togglePopup}>
-                View Details
-              </button>
-            </div>
-          </div>
-        </div>
-        {isOpenCardDetails && (
-          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white rounded-md p-8 max-w-md mx-auto">
-              <h2 className="text-2xl font-bold">title</h2>
-              <p className="text-gray-600">
-                description Lorem ipsum dolor sit amet, consectetur adipiscing
-                elit. Nullam eget tortor quam. Nulla facilisi. Vestibulum ante
-                ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-                Curae; Quisque nec tortor in nulla lacinia tincidunt. Fusce ac
-                felis eget nulla viverra suscipit ut eu ex
-              </p>
-              <div className="flex justify-center items-center">
-                <button className="py-2 px-4 mt-4 mx-3" onClick={togglePopup}>
-                  Close
-                </button>
-                <button className="py-2 px-4 mt-4 mx-3" onClick={togglePopup}>
-                  Request
-                </button>
-                <button className="py-2 px-4 mt-4 mx-3" onClick={togglePopup}>
-                  Accept
-                </button>
+      <NewPost open={isOpenNewPost} onClose={() => setIsOpenNewPost(false)} />
+
+      <div className="grid grid-cols-4 gap-5 px-2 py-2">
+        {postInfo.map((post) => (
+          <div
+            key={post._id}
+            className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:bg-zinc-50"
+          >
+            <div className="md:flex">
+              <div className="p-8">
+                <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+                  {post.contactName}
+                </div>
+                <h2 className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
+                  {post.jobTitle}
+                </h2>
+                <p className="mt-2 text-gray-500">{post.jobDescription}</p>
+                <h3>${post.price}</h3>
+                <Link
+                  className="px-2 items-center bg-red-800 hover:bg-transparent hover:text-red-800 text-white rounded-full"
+                  to={`/viewdetails/${post._id}`}
+                >
+                  View Details
+                </Link>
               </div>
             </div>
           </div>
-        )}
+        ))}
       </div>
     </div>
   );
